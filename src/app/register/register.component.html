@@ -1,0 +1,37 @@
+
+<h3 class="text text-success">Register Employee</h3>
+
+<form [formGroup]="empForm" (ngSubmit)="registerEmp()">
+
+    <div class="form-group">
+        <label>Id:</label>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="id">
+    </div>
+    <div *ngIf="id?.errors?.required && id?.touched" class="alert alert-danger">
+        id is required
+    </div>
+    <div *ngIf="id?.errors?.pattern && id?.touched" class="alert alert-danger">
+        Only numbers
+    </div>
+    <div *ngIf="id?.errors?.minlength && id?.touched" class="alert alert-danger">
+        minimum 3 digits
+    </div>
+
+    <div class="form-group">
+        <label>Name:</label>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+        <label>Salary</label>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="salary">
+    </div>
+   
+    <input type="submit" value="register" class="btn btn-primary">
+
+</form>
