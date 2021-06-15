@@ -1,30 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User } from './user';
+import { Observable } from 'rxjs';
+import { Employee } from './Employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(public http:HttpClient) { }
 
-  userAr:User[]=[
+  
 
-    new User("cts","1234"),
-    new User("admin","admin"),
-    new User("info","4321")
-  ];
+  validateUser(user:User):Observable<User>{
 
+    return this.http.get<User>("http://localhost:8099/getUser/"+user.name);
 
-  validateUser(user:User):boolean{
+   
+  }
 
-    for(let u of this.userAr){
-        if(u.name===user.name && u.password===user.password){
-          return true;
-        }
-    }
+  registerEmployee(employee:Employee){
 
-       return false;
+     return this.http.post("http://localhost:8099/employee",
+     {id:employee.id,name:employee.name,salary:employee.salary},{responseType:"text"});
 
   }
 

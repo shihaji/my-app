@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from '../login.service';
@@ -19,18 +20,26 @@ export class LoginComponent {
   eventEmitter=new EventEmitter<boolean>();
 
   message:string="";
+  user:User|undefined;
   
   validateUser(loginForm:NgForm){
 
-    let flag=this.loginServ.validateUser(new User(loginForm.value.name,loginForm.value.password));
-
-    if(flag){
-         this.eventEmitter.emit(false);
-      this.message="";
-    }else{
-      this.message="Invalid user name or password";
-    }
-
+    this.loginServ.validateUser(new User(loginForm.value.name,loginForm.value.password))
+    .subscribe(
+      
+      data=>{
+        if(data.name===loginForm.value.name && data.password===loginForm.value.password){
+          this.eventEmitter.emit(false);
+          this.message="";
+        }else{
+          this.message="Invalid user name or password";
+        }
+      
+      }
+   
+    
+    );
+  
   }
   
 

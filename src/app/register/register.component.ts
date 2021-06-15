@@ -1,5 +1,8 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Employee } from '../Employee';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent  {
 
-  constructor() { }
+  constructor(public loginService:LoginService) { }
 
 
   empForm=new FormGroup({
@@ -21,12 +24,17 @@ export class RegisterComponent  {
   get id(){
     return this.empForm.get('id');
   }
-
+ 
+  message:string="";
 
   registerEmp(){
 
-    console.log(this.empForm.value.id);
+  this.loginService.registerEmployee
+  (new Employee(this.empForm.value.id,this.empForm.value.name,this.empForm.value.salary))
+  .subscribe(data=>this.message="Succesfully registered employee");
 
+     this.empForm.reset();
+    
   }
 
 
