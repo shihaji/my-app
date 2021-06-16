@@ -1,0 +1,10 @@
+
+<table class="table table-bordered">
+    <tr *ngFor="let e of empList">
+        <td>{{e.id}}</td>
+        <td>{{e.name}}</td>
+        <td>{{e.salary}}</td>
+        <td><a routerLink="delete/{{e.id}}">delete</a></td>
+    </tr>
+
+</table>

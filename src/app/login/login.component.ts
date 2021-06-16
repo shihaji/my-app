@@ -27,15 +27,16 @@ export class LoginComponent {
     this.loginServ.validateUser(new User(loginForm.value.name,loginForm.value.password))
     .subscribe(
       
-      data=>{
-        if(data.name===loginForm.value.name && data.password===loginForm.value.password){
+      next=>{
+        if(next.name===loginForm.value.name && next.password===loginForm.value.password){
           this.eventEmitter.emit(false);
           this.message="";
-        }else{
-          this.message="Invalid user name or password";
         }
+        
+      },
       
-      }
+      error=>this.message="Invalid user name or password",
+      ()=>{console.log("completed")}
    
     
     );

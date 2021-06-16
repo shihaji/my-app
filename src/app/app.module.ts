@@ -12,6 +12,8 @@ import { SearchComponent } from './search/search.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ShowAllComponent } from './show-all/show-all.component';
+import { PayrollModule } from './payroll/payroll.module';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,16 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     SearchComponent,
     UpdateComponent,
-    DeleteComponent
+    DeleteComponent,
+    ShowAllComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PayrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

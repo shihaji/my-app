@@ -27,5 +27,16 @@ export class LoginService {
 
   }
 
+  getAllEmp(){
+
+    return this.http.get("http://localhost:8099/getAllEmp");
+
+  }
+
+  deleteEmp(id:number){
+   
+    return this.http.delete("http://localhost:8099/deleteEmp/"+id);
+  }
+
 
 }
